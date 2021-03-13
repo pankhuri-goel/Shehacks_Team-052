@@ -17,18 +17,6 @@ def speak(audio):
     engine.runAndWait()
 
 
-def Greetings():
-    hour = int(datetime.datetime.now().hour)
-    if hour>=0 and hour<12:
-        speak("Good Morning!")
-
-    elif hour>=12 and hour<18:
-        speak("Good Afternoon!")   
-
-    else:
-        speak("Good Evening!")  
-
-    speak(" Please tell me how may I help you")       
 
 def takeCommand():
     
@@ -50,13 +38,27 @@ def takeCommand():
         return "None"
     return query
 
-def sendEmail(to, content):
+def Email(to, content):
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.ehlo()
     server.starttls()
     server.login('youremail@gmail.com', 'your-password')
     server.sendmail('youremail@gmail.com', to, content)
     server.close()
+
+def Greetings():
+    hour = int(datetime.datetime.now().hour)
+    if hour>=0 and hour<12:
+        speak("Good Morning!")
+
+    elif hour>=12 and hour<18:
+        speak("Good Afternoon!")   
+
+    else:
+        speak("Good Evening!")  
+
+    speak(" Please tell me how may I help you")       
+    
 
 if __name__ == "__main__":
     Greetings()
@@ -103,8 +105,8 @@ if __name__ == "__main__":
             try:
                 speak("What should I say?")
                 content = takeCommand()
-                to = "ourEmail@gmail.com"    
-                sendEmail(to, content)
+                to = "YourEmail@gmail.com"    
+                Email(to, content)
                 speak("Email has been sent!")
             except Exception as e:
                 print(e)
