@@ -1,7 +1,7 @@
-import pyttsx3 #pip install pyttsx3
-import speech_recognition as sr #pip install speechRecognition
+import pyttsx3 
+import speech_recognition as sr 
 import datetime
-import wikipedia #pip install wikipedia
+import wikipedia 
 import webbrowser
 import os
 import smtplib
@@ -23,7 +23,7 @@ def takeCommand():
 
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Listening...")
+        print("Processing")
         r.pause_threshold = 1
         audio = r.listen(source)
 
@@ -65,25 +65,11 @@ if __name__ == "__main__":
     while True:
     
         query = takeCommand().lower()
-
         
-        if 'wikipedia' in query:
-            speak('Searching Wikipedia...')
-            query = query.replace("wikipedia", "")
-            results = wikipedia.summary(query, sentences=2)
-            speak("According to Wikipedia")
-            print(results)
-            speak(results)
-
-        elif 'open youtube' in query:
-            webbrowser.open("youtube.com")
-
-        elif 'open google' in query:
+        if 'open google' in query:
             webbrowser.open("google.com")
 
-        elif 'open stackoverflow' in query:
-            webbrowser.open("stackoverflow.com")   
-
+        
 
         elif 'play music' in query:
             music_dir = 'D:\\xyz\\songs\\abc'#path of your music directory
@@ -92,14 +78,37 @@ if __name__ == "__main__":
             speak('Which song number do you want me to play')
             num = takeCommand()
             os.startfile(os.path.join(music_dir, songs[num-1]))
+            
+            
+        elif 'open youtube' in query:
+            webbrowser.open("youtube.com")
+    
 
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak("Sir, the time is ",strTime)
+            
+            
+        elif 'wikipedia' in query:
+            speak('Searching Wikipedia...')
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences=2)
+            speak("According to Wikipedia")
+            print(results)
+            speak(results)
+    
+            
 
         elif 'open code' in query:
             codePath = "C:\\Users\\abc\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"#target of the application
             os.startfile(codePath)
+            
+            
+        elif 'open stackoverflow' in query:
+            webbrowser.open("stackoverflow.com")   
+
+            
+            
 
         elif 'email ' in query:
             try:
